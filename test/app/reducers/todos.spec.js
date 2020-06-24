@@ -16,7 +16,7 @@ describe('todoapp todos reducer', () => {
   it('should handle ADD_TODO', () => {
     expect(
       todos([], {
-        type: types.ADD_TODO,
+        type: 'ADD_TODO',
         text: 'Run the tests'
       })
     ).to.eql([{
@@ -31,7 +31,7 @@ describe('todoapp todos reducer', () => {
         completed: false,
         id: 0
       }], {
-        type: types.ADD_TODO,
+        type: 'ADD_TODO',
         text: 'Run the tests'
       })
     ).to.eql([{
@@ -54,7 +54,7 @@ describe('todoapp todos reducer', () => {
         completed: false,
         id: 0
       }], {
-        type: types.ADD_TODO,
+        type: 'ADD_TODO',
         text: 'Fix the tests'
       })
     ).to.eql([{
@@ -219,7 +219,7 @@ describe('todoapp todos reducer', () => {
       }, {
         type: types.CLEAR_COMPLETED
       }, {
-        type: types.ADD_TODO,
+        type: 'ADD_TODO',
         text: 'Write more tests'
       }].reduce(todos, [{
         id: 0,
