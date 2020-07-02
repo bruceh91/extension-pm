@@ -6,7 +6,7 @@ import * as trackingActions from './services/trackingActions';
 
 @connect(
   state => ({
-    tracking: state.tracking
+    tracking: state.tracking[0]
   }),
   dispatch => ({
     actions: bindActionCreators(trackingActions, dispatch)
@@ -20,15 +20,26 @@ export default class Tracking extends Component {
   };
 
   componentDidMount() {
-    this.props.actions.getTracking()
+    console.log(`tracking -- ${JSON.stringify(this.props.tracking)}`)
+    console.log(`blockedArray -- ${JSON.stringify(this.props.tracking.blockedArray)}`)
+    this.props.actions.getTracking(this.props.tracking.blockedArray)
   }
 
   render() {
 
     return (
       <div>
-        {/* <Button>test</Button> */}
-        <p>Current tab: { this.props.tracking[0].text}</p>
+        <div>
+          <h3>Blocked List</h3>
+          <ul>
+            {this.props.tracking.blockedArray.map((site) => {
+            return(
+            <li>{site}</li>
+            )
+            })}
+          </ul>
+        </div>
+        <p>Current tab: { this.props.tracking.text}</p>
       </div>
     );
   }
