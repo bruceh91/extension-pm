@@ -1,3 +1,5 @@
+import {onActiveTabChange} from '../../../app/components/tracking/services/trackingActions';
+
 function isInjected(tabId) {
   return chrome.tabs.executeScriptAsync(tabId, {
     code: `var injected = window.reactExampleInjected;
@@ -39,4 +41,12 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (chrome.runtime.lastError || result[0]) return;
 
   loadScript('inject', tabId, () => console.log('load inject bundle success!'));
+});
+
+chrome.tabs.onActivated.addListener(function() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    alert('hit before onActiveTabChange')
+    // HERE vvvv this function is failing when it gets to the dispatch
+    onActiveTabChange(tabs)
+  })
 });
